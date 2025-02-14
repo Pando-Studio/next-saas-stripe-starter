@@ -17,6 +17,13 @@ export const siteConfig: SiteConfig = {
   url: site_url,
   ogImage: `${site_url}/_static/og.jpg`,
   mailSupport: "support@saas-starter.com",
+  hero: {
+    title: {
+      text: "SaaS Starter",
+      highlight: "SaaS Starter",
+    },
+    subtitle: "Get your project off to an explosive start with SaaS Starter!",
+  },
 };
 
 export const navbarConfig: NavbarConfig = {

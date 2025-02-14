@@ -8,6 +8,13 @@ export type SiteConfig = {
   url: string;
   ogImage: string;
   mailSupport: string;
+  hero: {
+    title: {
+      text: string;
+      highlight: string;
+    };
+    subtitle: string;
+  };
 };
 
 export type NavItem = {
