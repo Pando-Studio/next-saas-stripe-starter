@@ -3,7 +3,7 @@ import { EmailConfig } from "next-auth/providers/email";
 import { Resend } from "resend";
 
 import { env } from "@/env.mjs";
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/config/landing";
 
 import { getUserByEmail } from "./user";
 

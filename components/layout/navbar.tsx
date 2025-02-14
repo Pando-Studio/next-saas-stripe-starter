@@ -6,8 +6,7 @@ import { useSelectedLayoutSegment } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 import { docsConfig } from "@/config/docs";
-import { marketingConfig } from "@/config/marketing";
-import { siteConfig } from "@/config/site";
+import { navbarConfig, siteConfig } from "@/config/landing";
 import { cn } from "@/lib/utils";
 import { useScroll } from "@/hooks/use-scroll";
 import { Button } from "@/components/ui/button";
@@ -35,7 +34,7 @@ export function NavBar({ scroll = false }: NavBarProps) {
   };
 
   const links =
-    (selectedLayout && configMap[selectedLayout]) || marketingConfig.mainNav;
+    (selectedLayout && configMap[selectedLayout]) || navbarConfig.mainNav;
 
   return (
     <header
@@ -86,16 +85,6 @@ export function NavBar({ scroll = false }: NavBarProps) {
               </div>
               <div className="flex lg:hidden">
                 <Icons.search className="size-6 text-muted-foreground" />
-              </div>
-              <div className="flex space-x-4">
-                <Link
-                  href={siteConfig.links.github}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Icons.gitHub className="size-7" />
-                  <span className="sr-only">GitHub</span>
-                </Link>
               </div>
             </div>
           ) : null}

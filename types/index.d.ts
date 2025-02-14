@@ -1,5 +1,4 @@
 import { User } from "@prisma/client";
-import type { Icon } from "lucide-react";
 
 import { Icons } from "@/components/shared/icons";
 
@@ -9,10 +8,6 @@ export type SiteConfig = {
   url: string;
   ogImage: string;
   mailSupport: string;
-  links: {
-    twitter: string;
-    github: string;
-  };
 };
 
 export type NavItem = {
@@ -27,7 +22,7 @@ export type NavItem = {
 
 export type MainNavItem = NavItem;
 
-export type MarketingConfig = {
+export type NavbarConfig = {
   mainNav: MainNavItem[];
 };
 
