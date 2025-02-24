@@ -53,8 +53,20 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(!isTablet);
 
   const toggleSidebar = () => {
-    setIsSidebarExpanded(!isSidebarExpanded);
+    setIsSidebarExpanded((prev) => !prev);
   };
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === "m") {
+        event.preventDefault();
+        toggleSidebar();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   useEffect(() => {
     setIsSidebarExpanded(!isTablet);
@@ -73,26 +85,30 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
             <div className="flex h-full max-h-screen flex-1 flex-col gap-2">
               <div className="flex h-14 items-center p-4 lg:h-[60px]">
                 {isSidebarExpanded ? <ProjectSwitcher /> : null}
-
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="ml-auto size-9 lg:size-8"
-                  onClick={toggleSidebar}
-                >
-                  {isSidebarExpanded ? (
-                    <PanelLeftClose
-                      size={18}
-                      className="stroke-muted-foreground"
-                    />
-                  ) : (
-                    <PanelRightClose
-                      size={18}
-                      className="stroke-muted-foreground"
-                    />
-                  )}
-                  <span className="sr-only">Toggle Sidebar</span>
-                </Button>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="relative z-50 ml-auto size-9 lg:size-8"
+                      onClick={toggleSidebar}
+                    >
+                      {isSidebarExpanded ? (
+                        <PanelLeftClose
+                          size={18}
+                          className="stroke-muted-foreground"
+                        />
+                      ) : (
+                        <PanelRightClose
+                          size={18}
+                          className="stroke-muted-foreground"
+                        />
+                      )}
+                      <span className="sr-only">Toggle Sidebar</span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent side="bottom">⌘M</TooltipContent>
+                </Tooltip>
               </div>
 
               <nav className="flex flex-1 flex-col gap-8 px-4 pt-4">
