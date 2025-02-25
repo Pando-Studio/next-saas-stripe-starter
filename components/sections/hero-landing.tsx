@@ -36,7 +36,7 @@ export default async function HeroLanding() {
               "gap-2",
             )}
           >
-            <span>Pricing</span>
+            <span>Go go pricing</span>
             <Icons.arrowRight className="size-4" />
           </Link>
         </div>
