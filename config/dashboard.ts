@@ -5,7 +5,7 @@ export const sidebarLinks: SidebarNavItem[] = [
     title: "MENU",
     items: [
       {
-        href: "/charts",
+        href: "/dashboard/charts",
         icon: "dashboard",
         title: "Charts",
         // authorizeOnly: UserRole.USER,

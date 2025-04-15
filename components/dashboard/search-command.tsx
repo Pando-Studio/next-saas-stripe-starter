@@ -16,6 +16,8 @@ import {
 } from "@/components/ui/command";
 import { Icons } from "@/components/shared/icons";
 
+import { DialogDescription, DialogTitle } from "../ui/dialog";
+
 export function SearchCommand({ links }: { links: SidebarNavItem[] }) {
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
@@ -55,6 +57,10 @@ export function SearchCommand({ links }: { links: SidebarNavItem[] }) {
       </Button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
+        <DialogTitle className="sr-only">Search</DialogTitle>
+        <DialogDescription className="sr-only">
+          Search for commands or links
+        </DialogDescription>
         <CommandInput placeholder="Type a command or search..." />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>

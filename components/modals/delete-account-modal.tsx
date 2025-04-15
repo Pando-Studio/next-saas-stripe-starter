@@ -5,6 +5,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 import { signOut, useSession } from "next-auth/react";
 import { toast } from "sonner";
 
@@ -55,6 +56,10 @@ function DeleteAccountModal({
       setShowModal={setShowDeleteAccountModal}
       className="gap-0"
     >
+      <DialogTitle className="sr-only">Delete Account</DialogTitle>
+      <DialogDescription className="sr-only">
+        Delete your account and all your data
+      </DialogDescription>
       <div className="flex flex-col items-center justify-center space-y-3 border-b p-4 pt-8 sm:px-16">
         <UserAvatar
           user={{
