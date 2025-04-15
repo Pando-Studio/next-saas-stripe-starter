@@ -80,10 +80,10 @@
 //   );
 // }
 
-// app/(docs)/docs/[[...slug]]/page.tsx
+import { notFound } from "next/navigation";
+import { allDocs } from "contentlayer/generated";
 
 import { getTableOfContents } from "@/lib/toc";
-import { constructMetadata, getBlurDataURL } from "@/lib/utils";
 import { Mdx } from "@/components/content/mdx-components";
 import { DocsPageHeader } from "@/components/docs/page-header";
 import { DocsPager } from "@/components/docs/pager";
@@ -92,17 +92,20 @@ import { DashboardTableOfContents } from "@/components/shared/toc";
 import "@/styles/mdx.css";
 
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { allDocs } from "contentlayer/generated";
 
-// Empêche la génération de pages pour des chemins non définis
+import { constructMetadata, getBlurDataURL } from "@/lib/utils";
+
+// Indique qu'on ne veut pas autoriser des routes non listées dans generateStaticParams
 export const dynamicParams = false;
 
+type Params = { slug?: string[] };
+
+// Pour éviter de répéter le typage
 interface DocPageProps {
-  params: { slug?: string[] };
+  params: Promise<Params>; // Next.js 15 : params est une promesse
 }
 
-async function getDocFromParams(params: { slug?: string[] }) {
+async function getDocFromParams(params: Params) {
   const slug = params.slug?.join("/") || "";
   const doc = allDocs.find((doc) => doc.slugAsParams === slug);
   return doc ?? null;
@@ -111,12 +114,16 @@ async function getDocFromParams(params: { slug?: string[] }) {
 export async function generateMetadata({
   params,
 }: DocPageProps): Promise<Metadata> {
-  const doc = await getDocFromParams(params);
+  const resolvedParams = await params;
+  const doc = await getDocFromParams(resolvedParams);
+
   if (!doc) return {};
+
   const { title, description } = doc;
+
   return constructMetadata({
     title: `${title} – SaaS Starter`,
-    description: description,
+    description,
   });
 }
 
@@ -128,12 +135,15 @@ export async function generateStaticParams(): Promise<{ slug?: string[] }[]> {
 }
 
 export default async function DocPage({ params }: DocPageProps) {
-  const doc = await getDocFromParams(params);
+  const resolvedParams = await params;
+  const doc = await getDocFromParams(resolvedParams);
+
   if (!doc) {
     notFound();
   }
 
   const toc = await getTableOfContents(doc.body.raw);
+
   const images = await Promise.all(
     doc.images.map(async (src: string) => ({
       src,
