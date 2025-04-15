@@ -171,7 +171,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/colin/Documents/PROJETS-DEV/PANDO-STUDIO/next-saas-stripe-starter/prisma/client",
+      "value": "/Users/clementverger/Documents/Github/next-saas-stripe-starter/prisma/client",
       "fromEnvVar": null
     },
     "config": {
@@ -185,7 +185,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/colin/Documents/PROJETS-DEV/PANDO-STUDIO/next-saas-stripe-starter/prisma/schema.prisma",
+    "sourceFilePath": "/Users/clementverger/Documents/Github/next-saas-stripe-starter/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
