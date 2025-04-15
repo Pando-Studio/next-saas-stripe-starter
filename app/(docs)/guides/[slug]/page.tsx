@@ -1,20 +1,20 @@
-import { allGuides } from "contentlayer/generated";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { allGuides } from "contentlayer/generated";
 
+import { getTableOfContents } from "@/lib/toc";
 import { Mdx } from "@/components/content/mdx-components";
 import { DocsPageHeader } from "@/components/docs/page-header";
 import { Icons } from "@/components/shared/icons";
 import { DashboardTableOfContents } from "@/components/shared/toc";
-import { getTableOfContents } from "@/lib/toc";
 
 import "@/styles/mdx.css";
 
 import { Metadata } from "next";
 
-import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
-import { buttonVariants } from "@/components/ui/button";
 import { cn, constructMetadata } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
 
 export async function generateStaticParams() {
   return allGuides.map((guide) => ({
@@ -27,7 +27,9 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata | undefined> {
-  const guide = allGuides.find((guide) => guide.slugAsParams === params.slug);
+  const { slug } = await Promise.resolve(params);
+
+  const guide = allGuides.find((guide) => guide.slugAsParams === slug);
   if (!guide) {
     return;
   }
@@ -47,7 +49,9 @@ export default async function GuidePage({
     slug: string;
   };
 }) {
-  const guide = allGuides.find((guide) => guide.slugAsParams === params.slug);
+  const { slug } = await Promise.resolve(params);
+
+  const guide = allGuides.find((guide) => guide.slugAsParams === slug);
 
   if (!guide) {
     notFound();
