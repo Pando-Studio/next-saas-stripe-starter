@@ -5,9 +5,15 @@ import("./env.mjs");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   images: {
     remotePatterns: [
+      {
+        hostname: "www.on-mag.fr",
+      },
+      {
+        protocol: "https",
+        hostname: "www.protection-des-mains.com",
+      },
       {
         protocol: "https",
         hostname: "avatars.githubusercontent.com",
@@ -23,7 +29,9 @@ const nextConfig = {
     ],
   },
   experimental: {
-    serverComponentsExternalPackages: ["@prisma/client"],
+    serverActions: {
+      bodySizeLimit: "5mb",
+    },
   },
 };
 
