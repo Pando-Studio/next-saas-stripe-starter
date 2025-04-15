@@ -15,9 +15,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata | undefined> {
-  const { slug } = await Promise.resolve(params);
+  const { slug } = await params;
 
   const category = BLOG_CATEGORIES.find((category) => category.slug === slug);
 
@@ -36,11 +36,9 @@ export async function generateMetadata({
 export default async function BlogCategory({
   params,
 }: {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await Promise.resolve(params);
+  const { slug } = await params;
 
   const category = BLOG_CATEGORIES.find((ctg) => ctg.slug === slug);
 
