@@ -5,15 +5,9 @@ export const sidebarLinks: SidebarNavItem[] = [
     title: "MENU",
     items: [
       {
-        href: "/chats",
+        href: "/charts",
         icon: "dashboard",
-        title: "Chats",
-        // authorizeOnly: UserRole.USER,
-      },
-      {
-        href: "/catalogs",
-        icon: "bookOpen",
-        title: "Catalogues",
+        title: "Charts",
         // authorizeOnly: UserRole.USER,
       },
     ],

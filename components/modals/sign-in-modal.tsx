@@ -5,6 +5,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 import { signIn } from "next-auth/react";
 
 import { Button } from "@/components/ui/button";
@@ -22,6 +23,10 @@ function SignInModal({
 
   return (
     <Modal showModal={showSignInModal} setShowModal={setShowSignInModal}>
+      <DialogTitle className="sr-only">Sign In to your account</DialogTitle>
+      <DialogDescription className="sr-only">
+        Sign in to your account with google to continue
+      </DialogDescription>
       <div className="w-full">
         <div className="flex flex-col items-center justify-center space-y-3 border-b bg-background px-4 py-6 pt-8 text-center md:px-16">
           <Icons.logo className="size-10" />
